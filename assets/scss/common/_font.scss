@@ -1,0 +1,39 @@
+@charset "UTF-8";
+/* font.scss */
+
+@font-face {
+  font-family: 'NotoSans';
+  font-style: normal;
+  font-weight: 100;
+  src: local('Noto Sans Thin'), local('NotoSans-Thin'),
+  url(~assets/font/NotoSansKR-Thin.woff) format('woff'),
+  url(~assets/font/NotoSansKR-Thin.woff2) format('woff2');
+  //url(~/assets/font/NotoSansKR-Thin.otf) format('opentype');
+}
+@font-face {
+  font-family: 'NotoSans';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Noto Sans Regular'), local('NotoSans-Regular'),
+  url(~assets/font/NotoSansKR-Regular.woff) format('woff'),
+  url(~assets/font/NotoSansKR-Regular.woff2) format('woff2');
+  //url(~/assets/font/NotoSansKR-Regular.otf) format('opentype');
+}
+@font-face {
+  font-family: 'roboto';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Roboto Regular'), local('Roboto-Regular'),
+  url(~assets/font/Roboto-Regular.woff) format('woff'),
+  url(~assets/font/Roboto-Regular.woff2) format('woff2');
+  //url(~/assets/font/Roboto-Regular.ttf) format('opentype');
+}
+@font-face {
+  font-family: 'nunito';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Nunito Bold'), local('Nunito-Bold'),
+  url(~assets/font/Nunito-Bold.woff) format('woff'),
+  url(~assets/font/Nunito-Bold.woff2) format('woff2');
+  //url(~/assets/font/Nunito-Bold.ttf) format('opentype');
+}

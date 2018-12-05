@@ -1,0 +1,19 @@
+@charset "UTF-8";
+/* footer.scss */
+
+.footer {
+	padding: 43px 0 65px 20px;
+	color: #fff;
+	font-size: 1.2rem;
+
+	.customer,
+	.policy,
+	.copyright {margin-top: 7px;}
+
+	.policy,
+	.copyright {color: rgba(255,255,255,0.5);}
+
+	.link-accent {text-decoration: underline;}
+
+	.policy .link {margin-right: 5px;}
+}

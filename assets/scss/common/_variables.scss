@@ -1,0 +1,70 @@
+@charset "UTF-8";
+/* variables.scss */
+
+/*
+  $base- reset용 기본 변수입니다.
+  $F- 폰트 관련 변수입니다.
+  $C- 컬러 관련 변수입니다.
+  $G- 글로벌 변수입니다.
+*/
+// Img Path
+$G-path-local: '../img/'; //local
+$G-path-img: $G-path-local;
+
+// Font Style
+$F-family-thin: HelveticaNeue-Thin, sans-serif-thin;
+$F-family-light: HelveticaNeue-Light, AppleSDGothicNeo-Light, Helvetica-Light, sans-serif;
+//$F-family-base: Helvetica, sans-serif;
+$F-family-base: apple sd gothic neo,Apple SD Gothid Neo,'apple sd gothic neo','Apple SD Gothid Neo',NotoSans,'NotoSans',notosans,sans-serif;
+$F-family-neue: HelveticaNeue, Helvetica, sans-serif;
+$F-family-medium: Helvetica, AppleSDGothicNeo-Medium, sans-serif;
+$F-family-eng: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+$F-family-kor: "NotoSans", "Malgun Gothic", sans-serif;
+$F-family-base: "NotoSans", "Malgun Gothic", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+
+// Base Font Style
+$root-font-size: 10px;
+$base-font-family: $F-family-base;
+$base-font-size: 1.4rem;
+$base-line-height: 1.25em;
+
+// Font size
+$F-size-xxbig: 3.6rem;
+$F-size-xbig: 2.8rem;
+$F-size-big: 2.0rem;
+$F-size: 1.4rem;
+$F-size-small: 1.3rem;
+$F-size-xsmall: 1.2rem;
+
+// Font weight
+$F-weight-light: 200;
+$F-weight-regular: 400;
+$F-weight-bold: 700;
+$F-weight-heavy: 800;
+
+// Color
+$C-base: #999; //gray
+$C-primary: #2496ff; //sky
+$C-primary2: #ffec00; //yellow
+$C-accent: #ffec00; //yellow
+
+// z-index
+$z-index: (
+	//layer : 10020,
+	//dimmed : 10010,
+	//navigation         : 100,
+	//footer             : 90,
+	//triangle           : 60,
+	//navigation-rainbow : 50,
+	//share-type         : 41,
+	//share              : 40,
+	//default            : 1,
+	//below              : -1,
+);
+
+// layout
+$left-space: 90px;
+$left-space-flexible: 63px;
+$height-header: 56px;
+$height-mini-player: 50px;
+$height-main-player: 100px;

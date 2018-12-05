@@ -1,0 +1,146 @@
+@charset "UTF-8";
+/* layout.scss */
+
+body {
+	overflow: hidden;
+	-webkit-touch-callout:none; //팝업창 차단하기
+	-webkit-touch-select:none; //복사막기
+	-ms-user-select:none; //텍스트 선택 불가
+	-moz-user-select:none; //텍스트 선택 불가
+	-webkit-user-select:none; //텍스트 선택 불가
+	-user-select:none; //텍스트 선택 불가
+	-webkit-tap-highlight-color:rgba(0,0,0,0); //링크를 터치했을때 나오는 기본 영역의 색상을 제어
+}
+.wrap,
+.container {
+	@include absolute(0, 0, 0, 0);
+	width: 100%;
+	height: 100%;
+	box-sizing: border-box;
+}
+
+.wrap { overflow: hidden; }
+
+.container {
+	@include overflowY;
+	//min-height: 100%;
+}
+
+.content {
+	min-height: 100%;
+	box-sizing: border-box;
+
+	.has-mini-player & { padding-bottom: $height-mini-player; }
+	.home & { overflow: hidden; }
+}
+
+// 현재 재생곡으로 책갈피 이동시 메인컨트롤러 밑으로 묻히는 이슈가 있어 wrap의 스크롤 영역 수정
+.has-main-player {
+	.container {
+		bottom: $height-main-player;
+		height: auto;
+		min-height: auto;
+	}
+
+	.content {padding-bottom: 0;}
+}
+
+.l-fixed-top {
+	@include fixed(0,null,null,0, 100);
+	width: 100%;
+}
+.l-fixed-bottom {
+	@include fixed(null,null,0,0, 100);
+	width: 100%;
+}
+.l-grid-align {
+	padding-left: $left-space;
+}
+@media screen and (max-width: 320px) {
+	.l-grid-align.flexible { padding-left: $left-space-flexible; }
+}
+
+.l-fullscreen {
+	@include flex;
+	@include flex-direction(column);
+
+	&__fluid {
+		@include flex;
+		@include flex-grow(1);
+		width: 100%;
+		max-width: 100%;
+
+		&.middle { @include flex-align(center); }
+	}
+}
+
+.scroll-x {
+	overflow: hidden;
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
+}
+
+// 검색 하단부
+.search-bottom {
+	@include absolute(null, 10px, $height-mini-player+8, null);
+}
+
+.tool-area {
+	[class^='btn-normal'] { margin-right: 6px; }
+
+	.popular-page & {
+		[class^='btn-normal'] { margin-right: 2px; }
+	}
+
+	&__wrap {
+		padding: 40px 0 40px $left-space;
+	}
+}
+
+// 하단 버튼 영역
+.bottom-btn__area {
+	overflow: hidden;
+	width: 100%;
+	height: $height-mini-player;
+	padding: 0 10px;
+	box-sizing: border-box;
+	background-color: #fff;
+	text-align: right;
+	box-shadow: 0 -10px 30px rgba(0,0,0, 0.05);
+	z-index: 5;
+
+	&.large {
+		height: 60px;
+	}
+
+	&.layer {
+		@include absolute(null,0,0,0, 5);
+		//box-shadow: none;
+	}
+}
+
+// play list top 등등
+.top-area {
+	padding: 76px 0 60px 90px;
+	border-bottom: 1px solid #f2f2f2;
+
+	.title {
+		color: #000;
+		font-size: 2.8rem;
+		line-height: 1.2;
+		font-weight: normal;
+		letter-spacing: -0.1rem;
+
+		&.small { font-size: 2.4rem; }
+	}
+
+	.tool-area {
+		margin-top: 42px;
+	}
+}
+
+@media screen and (max-width: 320px) {
+	.top-area.flexible,
+	.sub-top-area.flexible,
+	.l-grid-align.flexible{ padding-left: $left-space-flexible; }
+}
