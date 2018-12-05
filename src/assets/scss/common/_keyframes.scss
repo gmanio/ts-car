@@ -1,0 +1,30 @@
+@mixin keyframes( $animation ) {
+  @-webkit-keyframes #{$animation} {
+    @content;
+  }
+  @-moz-keyframes #{$animation} {
+    @content;
+  }
+  @-o-keyframes #{$animation} {
+    @content;
+  }
+  @keyframes #{$animation} {
+    @content;
+  }
+}
+@include keyframes(opacityOut) {
+  from { opacity: 1 }
+  to { opacity: 0 }
+}
+@include keyframes(opacityIn) {
+  from { opacity: 0 }
+  to { opacity: 1 }
+}
+@include keyframes(popOut) {
+  from { transform: translateY(0%) }
+  to { transform: translateY(100%) }
+}
+@include keyframes(popIn) {
+  from { transform: translateY(100%) }
+  to { transform: translateY(0%) }
+}
