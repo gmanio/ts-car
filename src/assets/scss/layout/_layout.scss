@@ -34,17 +34,6 @@ body {
 	.home & { overflow: hidden; }
 }
 
-// 현재 재생곡으로 책갈피 이동시 메인컨트롤러 밑으로 묻히는 이슈가 있어 wrap의 스크롤 영역 수정
-.has-main-player {
-	.container {
-		bottom: $height-main-player;
-		height: auto;
-		min-height: auto;
-	}
-
-	.content {padding-bottom: 0;}
-}
-
 .l-fixed-top {
 	@include fixed(0,null,null,0, 100);
 	width: 100%;

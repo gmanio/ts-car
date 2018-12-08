@@ -1,0 +1,54 @@
+<!-- <h1>{{title}}</h1> -->
+<!-- <h2>My favorite hero is: {{myHero}}</h2> -->
+<!-- <p>Todos:</p>
+<ul>
+  <li *ngFor="let todo of this.$todos | async">
+    {{ todo.content }}
+  </li>
+</ul> -->
+
+<p (click)="updateList()">Web Todo List 구현</p>
+<div class='container'>
+  <div class='add' (click)="toggleNewTask()">
+    <i class='fa fa-plus'></i>
+  </div>
+  <div class='add' (click)="sortedByDate()">
+    <i class='fas fa-sort-amount-down'></i>
+  </div>
+  <div class='add' (click)="updateList()">
+    <i class='fas fa-sort-amount-up'></i>
+  </div>
+  <div class='add' (click)="sortedByContent()">
+    <i class='fas fa-sort-alpha-down'></i>
+  </div>
+
+  <div class='title' (click)="updateList()">
+    <h1>Things to do</h1>
+  </div>
+  <div class='new-task blind'>
+    <a class='add-new' (click)="addTask()">
+      <i class='fa fa-plus'></i>
+    </a>
+    <input id='todo-text' placeholder='New task'>
+  </div>
+  <ul>
+    <li attr.data-seq="{{todo.seq}}" draggable droppable (onDrop)="onItemDrop($event)" [dragData]="todo" class="row" [class.done]="todo.done" *ngFor="let todo of this.$todos | async">
+      <a class='remove' (click)="removeTask($event, todo)">
+        <i class='fa fa-trash'></i>
+      </a>
+      <a class='completed' (click)="completeTask($event, todo)">
+        <i class='fa fa-check'></i>
+      </a>
+      <a class='edit' (click)="editTask($event, todo)">
+        <i class='fa fa-marker'></i>
+      </a>
+      <input class="todo-input" type="text" value="{{todo.content}}" disabled 
+      (focusout)="updateTask($event, todo)" (keyup.enter)="updateTask($event, todo)">
+      <div>
+        <span class='createdAt'>{{todo.createdAt | date:'shortTime'}}</span>
+        <span class="status_complete" *ngIf="todo.done">완료</span>
+      <span class="status_incomplete" *ngIf="!todo.done">미완료</span>
+</div>
+</li>
+</ul>
+</div>
