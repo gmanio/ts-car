@@ -1,0 +1,12 @@
+@charset "UTF-8";
+
+@import "layout/reset";
+
+// common
+@import "common/variables";
+@import "common/mixin";
+@import "common/base";
+
+// layout
+@import "layout/layout";
+@import "layout/footer";

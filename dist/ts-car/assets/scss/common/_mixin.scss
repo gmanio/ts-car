@@ -1,0 +1,359 @@
+@charset "utf-8";
+/* mixins.scss */
+
+@mixin spr-retina($sprite) {
+	@include sprite-image($sprite);
+	display: inline-block;
+	overflow: hidden;
+	width: nth($sprite, 5)/2;
+	height: nth($sprite, 6)/2;
+	vertical-align: middle;
+	content: '';
+	background-repeat: no-repeat;
+
+	$sprite-total-width: nth($sprite, 7);
+	$sprite-total-height: nth($sprite, 8);
+	background-size: $sprite-total-width/2  $sprite-total-height/2;
+
+	$sprite-offset-x: nth($sprite, 3);
+	$sprite-offset-y: nth($sprite, 4);
+	background-position: $sprite-offset-x/2  $sprite-offset-y/2;
+}
+@mixin spr-retina-center($sprite) {
+	@include spr-retina($sprite);
+	@include absolute(0,0,0,0);
+	margin:auto;
+}
+@mixin spr-retina-xy($sprite) {
+	$sprite-offset-x: nth($sprite, 3);
+	$sprite-offset-y: nth($sprite, 4);
+	background-position: $sprite-offset-x/2  $sprite-offset-y/2;
+}
+@mixin spr-retina-nocontent($sprite) {
+	@include sprite-image($sprite);
+	display: block;
+	width: nth($sprite, 5)/2;
+	height: nth($sprite, 6)/2;
+	background-repeat: no-repeat;
+
+	$sprite-total-width: nth($sprite, 7);
+	$sprite-total-height: nth($sprite, 8);
+	background-size: $sprite-total-width/2  $sprite-total-height/2;
+
+	$sprite-offset-x: nth($sprite, 3);
+	$sprite-offset-y: nth($sprite, 4);
+	background-position: $sprite-offset-x/2  $sprite-offset-y/2;
+}
+@mixin hdpi($ratio: 1.3) {
+	@media only screen and (-webkit-min-device-pixel-ratio: $ratio),
+	only screen and (min--moz-device-pixel-ratio: $ratio),
+	only screen and (-o-min-device-pixel-ratio: #{$ratio}/1),
+	only screen and (min-resolution: #{round($ratio*96)}dpi),
+	only screen and (min-resolution: #{$ratio}dppx) {
+		@content;
+	}
+}
+@mixin clear($content: '') {
+	&:after {
+		clear: both;
+		display: block;
+		content: '';
+	}
+}
+@mixin overflowX {
+	overflow: hidden;
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
+}
+@mixin overflowY {
+	overflow: hidden;
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
+}
+// 기본 Tablets 설정값
+@mixin gMobileTablet($width: 600px, $height: 450px) {
+	@media screen and (min-width: $width) and (min-height: $height) {
+		@content;
+	}
+}
+// landscape Phablet ~ Pad
+@mixin gPhablet($width: 640px) {
+	@media screen and (min-width: $width) {
+		@content;
+	}
+}
+@mixin g-invisible {
+	overflow: hidden;
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	clip: rect(1px, 1px, 1px, 1px);
+}
+@mixin g-invisible-reset {
+	overflow: visible;
+	position: static;
+	width: auto;
+	height: auto;
+	margin: 0;
+	clip: auto;
+}
+@mixin ellipsis($display: block, $max-width: 100%) {
+	display: $display;
+	overflow: hidden;
+	max-width: $max-width;
+	white-space: nowrap;
+	word-break: normal;
+	word-wrap: normal;
+	text-overflow: ellipsis;
+}
+@mixin radius($bd_radius: 100) {
+	-webkit-border-radius: $bd_radius + px;
+	-moz-border-radius: $bd_radius + px;
+	border-radius: $bd_radius + px;
+}
+@mixin contentElement($display:inline-block) {
+	display: $display;
+	content: '';
+}
+@mixin color-set($font-color,$background-color,$border-color) {
+	color: $font-color;
+	background-color: $background-color;
+	border-color: $border-color;
+}
+@mixin bar($height: $M-bar-height, $background: $M-bar-color) {
+	display: inline-block;
+	overflow: hidden;
+	width: 1px;
+	height: $height + px;
+	margin: -1px 5px 1px;
+	background-color: $background;
+	color: rgba(0,0,0,0);
+	vertical-align: middle;
+}
+@mixin input-placeholder($placeholder-color: #999) {
+	color: $placeholder-color;
+	opacity: 1;
+}
+
+// z-index
+//@function z($key) {
+//	@if not map-has-key($z-index, $key) {
+//		@warn "No layer found for `#{$key}` in $z-index map. Property omitted.";
+//	}
+//
+//	@return map-get($z-index, $key);
+//}
+
+// 임시사용
+// -------------------------
+@mixin absolute($top: null,$right: null,$bottom: null,$left: null, $zindex: null) {
+	position: absolute;
+	top: $top;
+	right: $right;
+	bottom: $bottom;
+	left: $left;
+	z-index: $zindex;
+}
+
+@mixin fixed($top: null,$right: null,$bottom: null,$left: null, $zindex: null) {
+	position: fixed;
+	top: $top;
+	right: $right;
+	bottom: $bottom;
+	left: $left;
+	z-index: $zindex;
+}
+
+@mixin multiline-ellipsis($lines: 2, $font-size: $base-font-size, $line-height: $base-line-height, $height-value: null){
+	@if unit($font-size) == 'rem' {
+		$font-size-number : strip-unit($font-size) * 10 !global;
+	} @else if unit($font-size) == 'px' {
+		$font-size-number : strip-unit($font-size) !global;
+	}
+
+	display: block;
+	display: -webkit-box;
+	overflow: hidden;
+
+	@if $height-value == 'fix' {
+		height: ($font-size-number * $line-height * $lines) + px;
+	} @else if $height-value == null {
+		max-height: ($font-size-number * $line-height * $lines) + px;
+	}
+
+	font-size: $font-size;
+	text-overflow: ellipsis;
+	line-height: $line-height;
+	-webkit-line-clamp: $lines;
+	-webkit-box-orient: vertical;
+	word-break: break-all;
+	word-wrap: break-word;
+}
+
+// strip unit
+@function strip-unit($number) {
+	@if type-of($number) == 'number' and not unitless($number) {
+		@return $number / ($number * 0 + 1);
+	}
+
+	@return $number;
+}
+
+//gradient
+@function legacy-direction($value) {
+	@if is-direction($value) == false {
+		@error "Cannot convert `#{$value}` to legacy syntax because it doesn't seem to be a direction.";
+	}
+
+	$conversion-map: (
+		to top          : bottom,
+		to right        : left,
+		to bottom       : top,
+		to left         : right,
+	);
+
+	@if map-has-key($conversion-map, $value) {
+		@return map-get($conversion-map, $value);
+	}
+
+	@return 90deg - $value;
+}
+
+@mixin linear-gradient($direction, $color-stops...) {
+	@if is-direction($direction) == false {
+		$color-stops: $direction, $color-stops;
+		$direction: 180deg;
+	}
+
+	background: nth(nth($color-stops, 1), 1);
+	background: -webkit-linear-gradient(legacy-direction($direction), $color-stops);
+	background: linear-gradient($direction, $color-stops);
+}
+
+//gradient for IE
+@function direction-filter($value) {
+	@if is-direction-filter($value) == false {
+		@error "Cannot convert `#{$value}` to legacy syntax because it doesn't seem to be a direction.";
+	}
+
+	$conversion-map-filter: (
+		to top          : bottom,
+		to top right    : bottom left,
+		to right top    : left bottom,
+		to right        : 1,
+		to bottom right : top left,
+		to right bottom : left top,
+		to bottom       : 0,
+		to bottom left  : top right,
+		to left bottom  : right top,
+		to left         : right,
+		to left top     : right bottom,
+		to top left     : bottom right
+	);
+
+	@if map-has-key($conversion-map-filter, $value) {
+		@return map-get($conversion-map-filter, $value);
+	}
+}
+
+@mixin linear-gradient-filter($from-color, $to-color) {
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=$from-color, endColorstr=$to-color, GradientType=1); /* IE6-9 */
+}
+
+/* Mobile Only ************************************************************************/
+
+//retina border 0.5px
+@mixin retina_bdr($vertical: top, $bg-color: #ddd) {
+	&:before {
+		content: '';
+		height: 1px;
+		background: #ddd;
+		overflow: hidden;
+		transform: scaleY(0.5);
+		-webkit-transform: scaleY(0.5);
+		transform-origin: 0 0;
+		-webkit-transform-origin: 0 0;
+
+		@if $vertical == 'top' {
+			@include absolute(0,0,null,0);
+		} @else if $vertical == 'bottom' {
+			@include absolute(null,0,0,0);
+		}
+	}
+}
+
+//flex
+@mixin flex {
+	display: -webkit-box; /* OLD - iOS 6-, Safari 3.1-6 */
+	display: -moz-box; /* OLD - Firefox 19- (buggy but mostly works) */
+	display: flex; /* iOS 7.1+, android 4.4+ */
+}
+//CSS3에 추가된 속성으로, flexible item이 flex 컨테이너 안에 위치되는 방법을 지정한다
+@mixin flex-direction($value: row) {
+	@if $value == row-reverse {
+		-webkit-box-direction: reverse;
+		-webkit-box-orient: horizontal;
+	} @else if $value == column {
+		-webkit-box-direction: normal;
+		-webkit-box-orient: vertical;
+	} @else if $value == column-reverse {
+		-webkit-box-direction: reverse;
+		-webkit-box-orient: vertical;
+	} @else {
+		-webkit-box-direction: normal;
+		-webkit-box-orient: horizontal;
+	}
+	-webkit-flex-direction: $value;
+	-moz-flex-direction: $value;
+	-ms-flex-direction: $value;
+	flex-direction: $value;
+}
+
+@mixin flex-align($value) {
+	@if $value == flex-start {
+		-webkit-box-align: start;
+		-ms-flex-align: start;
+	} @else if $value == flex-end {
+		-webkit-box-align: end;
+		-ms-flex-align: end;
+	} @else {
+		-webkit-box-align: $value;
+		-ms-flex-align: $value;
+	}
+	-webkit-align-items: $value;
+	-moz-align-items: $value;
+	align-items: $value;
+	text-align: $value;
+}
+
+//공간 내 콘텐츠의 좌우 정렬 상태를 지정한다
+@mixin flex-justify($value) {
+	@if $value == flex-start { //left or top 정렬
+		-webkit-box-pack: start;
+		-ms-flex-pack: start;
+	} @else if $value == flex-end { //right or bottom 정렬
+		-webkit-box-pack: end;
+		-ms-flex-pack: end;
+	} @else if $value == space-between { //양끝부터 여백 없이 시작해 동일 간격을 유지
+		-webkit-box-pack: justify;
+		-ms-flex-pack: justify;
+	} @else if $value == space-around { //양끝부터 여백 있게 시작해 동일 간격을 유지
+		-ms-flex-pack: distribute;
+	} @else {
+		-webkit-box-pack: $value;
+		-ms-flex-pack: $value;
+	}
+	-webkit-justify-content: $value;
+	-moz-justify-content: $value;
+	justify-content: $value;
+}
+
+//공간 내 콘텐츠의 너비, 높이에 대하여 증가형 숫자를 지정한다
+@mixin flex-grow($int: 0) {
+	-webkit-box-flex: $int;
+	-webkit-flex-grow: $int;
+	-moz-flex-grow: $int;
+	-ms-flex-positive: $int;
+	flex-grow: $int;
+}
